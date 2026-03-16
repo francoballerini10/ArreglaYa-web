@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ArreglaYa — Servicios del hogar con profesionales de confianza</title>
+  <meta name="description" content="ArreglaYa conecta clientes con profesionales verificados para servicios del hogar. Rápido, organizado y confiable." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --azul:        #2EBD5E;
+      --azul-dark:   #229148;
+      --azul-deeper: #166335;
+      --azul-soft:   #E3F7EC;
+      --azul-mid:    #74D99A;
+      --verde:       #1A8CFF;
+      --verde-dark:  #1070D4;
+      --verde-soft:  #E3F0FF;
+      --verde-mid:   #74B9FF;
+      --fondo:       #F4F7FB;
+      --fondo-card:  #FFFFFF;
+      --fondo-dark:  #07111F;
+      --fondo-mid:   #0C1D34;
+      --fondo-mid2:  #091829;
+      --texto:       #0C1A2B;
+      --texto-suave: #526070;
+      --texto-claro: #8CA0B0;
+      --borde:       #DDE6EF;
+      --borde-dark:  #172A42;
+      --radio:    14px;
+      --radio-sm:  9px;
+      --radio-lg: 22px;
+      --shadow-sm: 0 2px 8px rgba(0,0,0,0.05);
+      --shadow-md: 0 6px 28px rgba(0,0,0,0.08);
+      --shadow-lg: 0 14px 56px rgba(0,0,0,0.13);
+      --ff-brand: 'Nunito', sans-serif;
+      --ff-body:  'Inter', sans-serif;
+      --ease:     0.22s cubic-bezier(0.4,0,0.2,1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--ff-body); color: var(--texto); background: var(--fondo); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+    img { max-width: 100%; display: block; }
+    a   { text-decoration: none; color: inherit; }
+    ul  { list-style: none; }
+    button { cursor: pointer; border: none; background: none; font-family: inherit; }
+
+    /* LOGO — colores fijos del logo, independientes de los roles */
+    .brand-logo { font-family: var(--ff-brand); font-weight: 400; font-size: 1.5rem; letter-spacing: -0.01em; line-height: 1; display: inline-flex; align-items: baseline; white-space: nowrap; }
+    .logo-a { color: #1A8CFF; }
+    .logo-v { color: #2EBD5E; }
+    .brand-logo-dark .logo-a { color: #74B9FF; }
+    .brand-logo-dark .logo-v { color: #74D99A; }
+
+    /* LAYOUT */
+    .container { width: 100%; max-width: 1160px; margin: 0 auto; padding: 0 28px; }
+    .section    { padding: 100px 0; }
+    .section-sm { padding: 68px 0; }
+
+    h1,h2,h3,h4 { font-family: var(--ff-brand); line-height: 1.15; letter-spacing: -0.02em; }
+    h1 { font-size: clamp(2.2rem,5vw,3.6rem); font-weight: 800; }
+    h2 { font-size: clamp(1.75rem,3.5vw,2.7rem); font-weight: 700; }
+    h3 { font-size: clamp(1.2rem,2.5vw,1.55rem); font-weight: 700; }
+    h4 { font-size: 1.05rem; font-weight: 700; }
+    p  { font-size: 1rem; color: var(--texto-suave); }
+    .text-lg { font-size: 1.12rem; line-height: 1.75; }
+
+    .label { display: inline-flex; align-items: center; gap: 6px; font-family: var(--ff-brand); font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 5px 13px; border-radius: 100px; margin-bottom: 18px; }
+    .label-azul    { background: var(--azul-soft);  color: var(--azul-dark); }
+    .label-verde   { background: var(--verde-soft); color: var(--verde-dark); }
+    .label-blanco  { background: rgba(255,255,255,0.09); color: rgba(255,255,255,0.72); border: 1px solid rgba(255,255,255,0.14); }
+    .label-neutral { background: var(--borde); color: var(--texto-suave); }
+    .section-header { text-align: center; max-width: 640px; margin: 0 auto 64px; }
+
+    /* BOTONES */
+    .btn { display: inline-flex; align-items: center; gap: 8px; font-family: var(--ff-brand); font-size: 15px; font-weight: 700; padding: 14px 28px; border-radius: 12px; transition: all var(--ease); white-space: nowrap; }
+    .btn-azul   { background: var(--azul);  color: #fff; box-shadow: 0 4px 18px rgba(26,140,255,0.32); }
+    .btn-azul:hover  { background: var(--azul-dark);  transform: translateY(-2px); box-shadow: 0 8px 28px rgba(26,140,255,0.42); }
+    .btn-verde  { background: var(--verde); color: #fff; box-shadow: 0 4px 18px rgba(46,189,94,0.30); }
+    .btn-verde:hover { background: var(--verde-dark); transform: translateY(-2px); box-shadow: 0 8px 28px rgba(46,189,94,0.40); }
+    .btn-outline-blanco { background: transparent; color: #fff; border: 1.5px solid rgba(255,255,255,0.28); }
+    .btn-outline-blanco:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.55); }
+    .btn-ghost { background: var(--fondo-card); color: var(--texto); border: 1.5px solid var(--borde); }
+    .btn-ghost:hover { border-color: var(--azul); color: var(--azul); }
+
+    /* NAV */
+    .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; transition: all var(--ease); }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 70px; gap: 32px; }
+    .nav.scrolled { background: rgba(7,17,31,0.94); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border-bottom: 1px solid var(--borde-dark); box-shadow: 0 4px 24px rgba(0,0,0,0.22); }
+    .nav-links { display: flex; align-items: center; gap: 28px; }
+    .nav-links a { font-family: var(--ff-brand); font-size: 15px; font-weight: 600; color: rgba(255,255,255,0.62); transition: color var(--ease); }
+    .nav-links a:hover { color: #fff; }
+    .nav-cta { display: flex; align-items: center; gap: 12px; }
+    .nav-hamburger { display: none; flex-direction: column; gap: 5px; padding: 6px; }
+    .nav-hamburger span { display: block; width: 22px; height: 2px; background: #fff; border-radius: 2px; transition: all var(--ease); }
+    .nav-mobile-menu { display: none; flex-direction: column; background: var(--fondo-mid); border-top: 1px solid var(--borde-dark); padding: 16px 24px 28px; }
+    .nav-mobile-menu.open { display: flex; }
+    .nav-mobile-menu a { font-family: var(--ff-brand); font-weight: 600; font-size: 15px; color: rgba(255,255,255,0.72); padding: 13px 0; border-bottom: 1px solid var(--borde-dark); transition: color var(--ease); }
+    .nav-mobile-menu a:last-of-type { border-bottom: none; }
+    .nav-mobile-menu a:hover { color: #fff; }
+    .nav-mobile-btns { display: flex; flex-direction: column; gap: 10px; margin-top: 20px; }
+
+    /* HERO */
+    #hero { background: var(--fondo-dark); min-height: 100vh; display: flex; flex-direction: column; justify-content: center; position: relative; overflow: hidden; padding-top: 80px; }
+    .hero-topline { position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--azul), var(--verde)); }
+    .blob { position: absolute; border-radius: 50%; filter: blur(100px); pointer-events: none; }
+    .blob-a { width: 660px; height: 660px; background: var(--azul);  opacity: 0.13; top: -160px; left: -160px; }
+    .blob-v { width: 500px; height: 500px; background: var(--verde); opacity: 0.11; bottom: -90px; right: -90px; }
+    .blob-m { width: 260px; height: 260px; background: #0A7BFF; opacity: 0.07; top: 48%; left: 55%; transform: translate(-50%,-50%); }
+    .hero-grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,0.016) 1px,transparent 1px), linear-gradient(90deg,rgba(255,255,255,0.016) 1px,transparent 1px); background-size: 72px 72px; pointer-events: none; }
+    .hero-content { position: relative; z-index: 2; padding: 80px 0 96px; }
+
+    .hero-eyebrow { display: flex; align-items: center; gap: 10px; margin-bottom: 30px; flex-wrap: wrap; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 6px; font-family: var(--ff-brand); font-size: 12px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; padding: 6px 14px; border-radius: 100px; }
+    .hb-a { background: rgba(26,140,255,0.14); color: var(--azul-mid);  border: 1px solid rgba(26,140,255,0.28); }
+    .hb-v { background: rgba(46,189,94,0.14);  color: var(--verde-mid); border: 1px solid rgba(46,189,94,0.28); }
+
+    .hero-title { color: #fff; margin-bottom: 26px; max-width: 820px; line-height: 1.1; }
+    .hl-a { color: var(--azul-mid); }
+    .hero-sub-line { display: block; font-size: 0.62em; font-weight: 400; color: rgba(255,255,255,0.36); margin-top: 8px; }
+    .hero-subtitle { font-size: clamp(1rem,2vw,1.17rem); color: rgba(255,255,255,0.50); max-width: 560px; margin-bottom: 44px; line-height: 1.78; }
+    .hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 64px; }
+    .hero-stats { display: flex; gap: 52px; flex-wrap: wrap; padding-top: 44px; border-top: 1px solid rgba(255,255,255,0.07); }
+    .stat-num { font-family: var(--ff-brand); font-size: 2rem; font-weight: 800; color: #fff; line-height: 1; margin-bottom: 5px; letter-spacing: -0.03em; }
+    .stat-label { font-size: 12.5px; color: rgba(255,255,255,0.35); font-weight: 500; }
+
+    /* PROBLEMA */
+    #problema { background: var(--fondo-dark); padding: 72px 0; border-top: 1px solid var(--borde-dark); }
+    .prob-intro { display: flex; align-items: flex-end; justify-content: space-between; gap: 32px; margin-bottom: 40px; flex-wrap: wrap; }
+    .prob-intro h2 { color: #fff; max-width: 500px; }
+    .prob-intro p  { color: rgba(255,255,255,0.37); max-width: 320px; font-size: 15px; }
+    .prob-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
+    .prob-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); border-radius: var(--radio); padding: 26px 22px; transition: all var(--ease); }
+    .prob-card:hover { background: rgba(26,140,255,0.07); border-color: rgba(26,140,255,0.22); transform: translateY(-2px); }
+    .prob-icon { width: 40px; height: 40px; border-radius: 11px; background: rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: center; margin-bottom: 14px; }
+    .prob-card h4 { color: rgba(255,255,255,0.82); font-size: 15px; margin-bottom: 7px; }
+    .prob-card p  { font-size: 13.5px; color: rgba(255,255,255,0.36); line-height: 1.65; }
+
+    /* QUÉ ES */
+    #que-es { background: var(--fondo); }
+    .que-es-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center; }
+    .mock-wrap { position: relative; padding: 20px 24px 44px; }
+    .mock-card { background: var(--fondo-dark); border-radius: var(--radio-lg); padding: 28px; position: relative; overflow: hidden; box-shadow: var(--shadow-lg); }
+    .mock-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg,var(--azul),var(--verde)); }
+    .roles-row { display: flex; gap: 10px; margin-bottom: 22px; }
+    .role-chip { display: flex; align-items: center; gap: 7px; padding: 8px 14px; border-radius: 100px; font-family: var(--ff-brand); font-size: 13px; font-weight: 700; }
+    .rc-a { background: rgba(26,140,255,0.15); color: var(--azul-mid);  border: 1px solid rgba(26,140,255,0.28); }
+    .rc-v { background: rgba(46,189,94,0.15);  color: var(--verde-mid); border: 1px solid rgba(46,189,94,0.28); }
+    .dot   { width: 8px; height: 8px; border-radius: 50%; }
+    .dot-a { background: var(--azul); }
+    .dot-v { background: var(--verde); }
+    .mock-row { background: rgba(255,255,255,0.045); border-radius: 10px; padding: 13px 15px; display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+    .mock-row-l { display: flex; align-items: center; gap: 10px; }
+    .mmi { width: 30px; height: 30px; border-radius: 8px; display: flex; align-items: center; justify-content: center; }
+    .mmi-a { background: rgba(26,140,255,0.18); }
+    .mmi-v { background: rgba(46,189,94,0.18); }
+    .mock-tag { font-family: var(--ff-brand); font-size: 11px; font-weight: 700; padding: 3px 9px; border-radius: 100px; }
+    .mt-a { background: rgba(26,140,255,0.15); color: var(--azul-mid); }
+    .mt-v { background: rgba(46,189,94,0.15);  color: var(--verde-mid); }
+    .connector { display: flex; align-items: center; gap: 10px; margin: 14px 0; }
+    .con-line { flex: 1; height: 1px; background: linear-gradient(90deg,rgba(26,140,255,0.35),rgba(46,189,94,0.35)); }
+    .con-node { width: 34px; height: 34px; border-radius: 9px; background: linear-gradient(135deg,var(--azul),var(--verde)); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .mock-pro-row { background: rgba(46,189,94,0.07); border: 1px solid rgba(46,189,94,0.18); border-radius: 10px; padding: 13px 15px; display: flex; align-items: center; justify-content: space-between; }
+    .mock-av { width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--ff-brand); font-weight: 800; font-size: 11px; color: #fff; }
+    .av-v { background: linear-gradient(135deg,var(--verde),var(--verde-dark)); }
+    .mock-floating { position: absolute; bottom: -16px; right: -16px; background: var(--fondo-card); border: 1px solid var(--borde); border-radius: var(--radio); padding: 14px 18px; box-shadow: var(--shadow-lg); display: flex; align-items: center; gap: 11px; animation: floatY 4s ease-in-out infinite; }
+    .float-check { width: 36px; height: 36px; border-radius: 50%; background: var(--verde-soft); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    @keyframes floatY { 0%,100%{transform:translateY(0);}50%{transform:translateY(-9px);} }
+    .check-list { display: flex; flex-direction: column; gap: 13px; }
+    .check-item { display: flex; align-items: center; gap: 11px; }
+    .check-box-sm { width: 26px; height: 26px; border-radius: 7px; background: var(--azul-soft); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+
+    /* CÓMO FUNCIONA */
+    #como-funciona { background: #fff; }
+    .tabs-wrap { display: flex; justify-content: center; margin-bottom: 52px; }
+    .tabs { display: flex; gap: 6px; background: var(--fondo); padding: 5px; border-radius: 14px; border: 1px solid var(--borde); }
+    .tab-btn { display: flex; align-items: center; gap: 8px; padding: 11px 22px; border-radius: 10px; font-family: var(--ff-brand); font-size: 14px; font-weight: 700; color: var(--texto-suave); transition: all var(--ease); }
+    .tab-btn.act-a { background: var(--azul);  color: #fff; box-shadow: 0 4px 16px rgba(26,140,255,0.32); }
+    .tab-btn.act-v { background: var(--verde); color: #fff; box-shadow: 0 4px 16px rgba(46,189,94,0.30); }
+    .tab-btn:hover:not(.act-a):not(.act-v) { background: var(--fondo-card); color: var(--texto); }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+    .steps-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; position: relative; }
+    .steps-grid::before { content: ''; position: absolute; top: 36px; left: calc(16.6% + 36px); right: calc(16.6% + 36px); height: 0; border-top: 2px dashed var(--borde); }
+    .step-card { background: var(--fondo); border: 1px solid var(--borde); border-radius: var(--radio); padding: 30px 26px; text-align: center; position: relative; z-index: 1; transition: all var(--ease); }
+    .step-card:hover { box-shadow: var(--shadow-md); transform: translateY(-4px); border-color: transparent; }
+    .step-num { width: 68px; height: 68px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--ff-brand); font-size: 1.5rem; font-weight: 800; margin: 0 auto 18px; }
+    .sn-a { background: var(--azul-soft);  color: var(--azul-dark); }
+    .sn-v { background: var(--verde-soft); color: var(--verde-dark); }
+    .step-card h4 { margin-bottom: 9px; color: var(--texto); }
+
+    /* BENEFICIOS */
+    #clientes    { background: linear-gradient(155deg,#EFF6FF 0%,var(--fondo) 60%); position: relative; overflow: hidden; }
+    #clientes::before  { content: ''; position: absolute; top:-80px; right:-80px; width:380px; height:380px; background: var(--azul-soft); border-radius:50%; filter:blur(80px); opacity:.55; pointer-events:none; }
+    #trabajadores { background: linear-gradient(155deg,#EDFAF3 0%,var(--fondo) 60%); position: relative; overflow: hidden; }
+    #trabajadores::before { content: ''; position: absolute; top:-80px; left:-80px; width:380px; height:380px; background: var(--verde-soft); border-radius:50%; filter:blur(80px); opacity:.7; pointer-events:none; }
+
+    .ben-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+    .ben-grid.rev { direction: rtl; }
+    .ben-grid.rev > * { direction: ltr; }
+    .ben-list { display: flex; flex-direction: column; gap: 22px; }
+    .ben-item { display: flex; gap: 15px; align-items: flex-start; }
+    .ben-icon { width: 46px; height: 46px; border-radius: 13px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .bi-a { background: var(--azul-soft); }
+    .bi-v { background: var(--verde-soft); }
+    .ben-item h4 { margin-bottom: 4px; }
+
+    .bv-card { background: var(--fondo-card); border: 1px solid var(--borde); border-radius: var(--radio-lg); padding: 26px; box-shadow: var(--shadow-md); }
+    .bv-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; }
+    .bv-avatar { width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--ff-brand); font-weight: 800; font-size: 1rem; color: #fff; }
+    .bva-a { background: linear-gradient(135deg,var(--azul),var(--azul-dark)); }
+    .bva-v { background: linear-gradient(135deg,var(--verde),var(--verde-dark)); }
+    .bv-badge { font-family: var(--ff-brand); font-size: 12px; font-weight: 700; padding: 4px 11px; border-radius: 100px; }
+    .bvb-a { background: var(--azul-soft);  color: var(--azul-dark); }
+    .bvb-v { background: var(--verde-soft); color: var(--verde-dark); }
+    .bv-row { display: flex; align-items: center; justify-content: space-between; padding: 11px 14px; background: var(--fondo); border-radius: 9px; margin-bottom: 9px; }
+    .bv-row-l { display: flex; align-items: center; gap: 9px; }
+    .bv-dot { width: 9px; height: 9px; border-radius: 50%; }
+
+    /* QUÉ ES — PILLARS */
+    #que-es { background: var(--fondo); }
+    .que-es-pillars { display: grid; grid-template-columns: repeat(4,1fr); gap: 18px; }
+    .qe-pillar { background: var(--fondo-card); border: 1px solid var(--borde); border-radius: var(--radio); padding: 28px 22px; text-align: center; transition: all var(--ease); }
+    .qe-pillar:hover { box-shadow: var(--shadow-md); transform: translateY(-3px); border-color: transparent; }
+    .qe-icon { width: 52px; height: 52px; border-radius: 14px; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; }
+    .qei-a { background: var(--azul-soft); }
+    .qei-v { background: var(--verde-soft); }
+    .qe-pillar h4 { margin-bottom: 8px; font-size: 1rem; }
+    .qe-pillar p  { font-size: 13.5px; line-height: 1.65; }
+
+    /* CONFIANZA */
+    #confianza { background: var(--fondo-dark); }
+    .con-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+    .con-card { background: rgba(255,255,255,0.034); border: 1px solid rgba(255,255,255,0.065); border-radius: var(--radio); padding: 28px 24px; transition: all var(--ease); }
+    .con-card:hover { background: rgba(26,140,255,0.09); border-color: rgba(26,140,255,0.26); transform: translateY(-3px); }
+    .con-icon { width: 48px; height: 48px; border-radius: 13px; display: flex; align-items: center; justify-content: center; margin-bottom: 18px; }
+    .ci-a { background: rgba(26,140,255,0.14); }
+    .ci-v { background: rgba(46,189,94,0.14); }
+    .con-card h4 { color: #fff; margin-bottom: 9px; }
+    .con-card p  { color: rgba(255,255,255,0.40); font-size: 14px; }
+
+    /* DIFERENCIADORES */
+    #diferenciadores { background: var(--fondo); }
+    .dif-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; }
+    .dif-card { background: var(--fondo-card); border: 1px solid var(--borde); border-radius: var(--radio); padding: 26px 22px; position: relative; overflow: hidden; transition: all var(--ease); }
+    .dif-card:hover { box-shadow: var(--shadow-md); transform: translateY(-3px); border-color: transparent; }
+    .dif-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; }
+    .dif-card.da::before { background: var(--azul); }
+    .dif-card.dv::before { background: var(--verde); }
+    .dif-card.dm::before { background: linear-gradient(90deg,var(--azul),var(--verde)); }
+    .dif-num { font-family: var(--ff-brand); font-size: 2.5rem; font-weight: 800; color: var(--borde); line-height: 1; margin-bottom: 10px; letter-spacing: -0.04em; }
+    .dif-card h4 { margin-bottom: 7px; }
+    .dif-card p  { font-size: 13.5px; }
+
+    /* VISIÓN */
+    #vision { background: var(--fondo-dark); position: relative; overflow: hidden; }
+    #vision::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,0.015) 1px,transparent 1px), linear-gradient(90deg,rgba(255,255,255,0.015) 1px,transparent 1px); background-size: 56px 56px; pointer-events: none; }
+    .vision-wrap { position: relative; z-index: 1; text-align: center; max-width: 740px; margin: 0 auto; }
+    .vision-wrap h2 { color: #fff; margin-bottom: 22px; }
+    .vision-wrap > p { color: rgba(255,255,255,0.46); font-size: 1.08rem; line-height: 1.8; margin-bottom: 14px; }
+    .phases { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-top: 56px; }
+    .phase { background: rgba(255,255,255,0.034); border: 1px solid rgba(255,255,255,0.065); border-radius: var(--radio); padding: 22px; text-align: left; }
+    .phase-label { font-family: var(--ff-brand); font-size: 11px; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; margin-bottom: 9px; }
+    .pl-a { color: var(--azul-mid); }
+    .pl-v { color: var(--verde-mid); }
+    .pl-g { color: rgba(255,255,255,0.36); }
+    .phase h4 { color: #fff; margin-bottom: 7px; }
+    .phase p  { font-size: 13px; color: rgba(255,255,255,0.38); }
+
+    /* FAQ */
+    #faq { background: var(--fondo); }
+    .faq-wrap { max-width: 740px; margin: 0 auto; display: flex; flex-direction: column; gap: 10px; }
+    .faq-item { background: var(--fondo-card); border: 1px solid var(--borde); border-radius: var(--radio); overflow: hidden; transition: all var(--ease); }
+    .faq-item.open { border-color: var(--azul); box-shadow: 0 0 0 3px rgba(26,140,255,0.10); }
+    .faq-q { display: flex; align-items: center; justify-content: space-between; padding: 20px 22px; cursor: pointer; gap: 14px; }
+    .faq-q h4 { font-size: 14.5px; font-weight: 700; color: var(--texto); line-height: 1.4; }
+    .faq-toggle { width: 30px; height: 30px; border-radius: 8px; background: var(--fondo); border: 1px solid var(--borde); display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: all var(--ease); }
+    .faq-item.open .faq-toggle { background: var(--azul-soft); border-color: var(--azul); transform: rotate(45deg); }
+    .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
+    .faq-ai { padding: 0 22px 20px; }
+    .faq-ai p { font-size: 14px; line-height: 1.75; }
+    .faq-item.open .faq-a { max-height: 320px; }
+
+    /* CTA FINAL */
+    #cta-final { background: linear-gradient(140deg,var(--fondo-dark) 0%,var(--fondo-mid2) 100%); position: relative; overflow: hidden; }
+    .cta-wrap { position: relative; z-index: 1; text-align: center; }
+    .cta-wrap h2 { color: #fff; margin-bottom: 18px; }
+    .cta-wrap > p { color: rgba(255,255,255,0.44); font-size: 1.08rem; max-width: 500px; margin: 0 auto 44px; }
+    .cta-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; max-width: 700px; margin: 0 auto; }
+    .cta-card { border-radius: var(--radio-lg); padding: 34px 30px; text-align: left; transition: transform var(--ease); }
+    .cta-card:hover { transform: translateY(-4px); }
+    .cta-card-a { background: linear-gradient(135deg,rgba(26,140,255,0.14),rgba(26,140,255,0.05)); border: 1px solid rgba(26,140,255,0.28); }
+    .cta-card-v { background: linear-gradient(135deg,rgba(46,189,94,0.14),rgba(46,189,94,0.05));  border: 1px solid rgba(46,189,94,0.28); }
+    .cta-card h3 { color: #fff; margin-bottom: 9px; font-size: 1.25rem; }
+    .cta-card p  { color: rgba(255,255,255,0.42); font-size: 14px; margin-bottom: 22px; }
+
+    /* FOOTER */
+    footer { background: #040D18; border-top: 1px solid var(--borde-dark); padding: 60px 0 30px; }
+    .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; padding-bottom: 44px; border-bottom: 1px solid var(--borde-dark); margin-bottom: 28px; }
+    .footer-desc { font-size: 14px; color: rgba(255,255,255,0.32); line-height: 1.75; margin-top: 14px; max-width: 270px; }
+    .footer-roles { display: flex; gap: 10px; margin-top: 18px; }
+    .fr-chip { display: flex; align-items: center; gap: 5px; font-family: var(--ff-brand); font-size: 11.5px; font-weight: 700; padding: 4px 11px; border-radius: 100px; }
+    .frc-a { background: rgba(26,140,255,0.10); color: rgba(26,140,255,0.62); border: 1px solid rgba(26,140,255,0.18); }
+    .frc-v { background: rgba(46,189,94,0.10);  color: rgba(46,189,94,0.62);  border: 1px solid rgba(46,189,94,0.18); }
+    .footer-col h5 { font-family: var(--ff-brand); font-size: 12px; font-weight: 700; color: rgba(255,255,255,0.36); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 18px; }
+    .footer-col ul { display: flex; flex-direction: column; gap: 11px; }
+    .footer-col ul a { font-size: 14px; color: rgba(255,255,255,0.34); transition: color var(--ease); }
+    .footer-col ul a:hover { color: rgba(255,255,255,0.80); }
+    .footer-bottom { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+    .footer-bottom p { font-size: 12.5px; color: rgba(255,255,255,0.18); }
+
+    /* ANIMACIONES */
+    .reveal { opacity: 0; transform: translateY(26px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    @keyframes fadeUp { from{opacity:0;transform:translateY(28px);}to{opacity:1;transform:translateY(0);} }
+    .hero-content > * { animation: fadeUp 0.65s ease both; }
+    .hero-eyebrow  { animation-delay: 0.10s; }
+    .hero-title    { animation-delay: 0.20s; }
+    .hero-subtitle { animation-delay: 0.30s; }
+    .hero-ctas     { animation-delay: 0.40s; }
+    .hero-stats    { animation-delay: 0.50s; }
+
+    /* RESPONSIVE */
+    @media (max-width: 1024px) {
+      .que-es-pillars { grid-template-columns: 1fr 1fr; }
+      .footer-top  { grid-template-columns: 1fr 1fr; }
+      .dif-grid    { grid-template-columns: 1fr 1fr; }
+      .prob-grid   { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 768px) {
+      .section { padding: 72px 0; }
+      .nav-links,.nav-cta { display: none; }
+      .nav-hamburger { display: flex; }
+      .hero-ctas { flex-direction: column; align-items: flex-start; }
+      .hero-stats { gap: 32px; }
+      .steps-grid { grid-template-columns: 1fr; }
+      .steps-grid::before { display: none; }
+      .ben-grid { grid-template-columns: 1fr; }
+      .ben-grid.rev { direction: ltr; }
+      .con-grid { grid-template-columns: 1fr 1fr; }
+      .phases { grid-template-columns: 1fr; }
+      .cta-cards { grid-template-columns: 1fr; max-width: 360px; }
+      .footer-top { grid-template-columns: 1fr; gap: 32px; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+    }
+    @media (max-width: 520px) {
+      .prob-grid,.dif-grid,.con-grid,.que-es-pillars { grid-template-columns: 1fr; }
+      .tabs { flex-direction: column; }
+    }
+    .i-sm{width:18px;height:18px;} .i-md{width:22px;height:22px;} .i-lg{width:26px;height:26px;}
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="navbar">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="#hero" class="brand-logo brand-logo-dark">
+        <span class="logo-a">Arregla</span><span class="logo-v">Ya</span>
+      </a>
+      <div class="nav-links">
+        <a href="#que-es">Qué es</a>
+        <a href="#como-funciona">Cómo funciona</a>
+        <a href="#clientes">Clientes</a>
+        <a href="#trabajadores">Profesionales</a>
+        <a href="#faq">FAQ</a>
+      </div>
+      <div class="nav-cta">
+        <a href="#cta-final" class="btn btn-azul" style="padding:10px 20px;font-size:13px;">Quiero usarla</a>
+      </div>
+      <button class="nav-hamburger" id="hamburger" aria-label="Menú">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+  <div class="nav-mobile-menu" id="mobile-menu">
+    <a href="#que-es"        onclick="closeMobile()">Qué es</a>
+    <a href="#como-funciona" onclick="closeMobile()">Cómo funciona</a>
+    <a href="#modelo"        onclick="closeMobile()">Precios</a>
+    <a href="#clientes"      onclick="closeMobile()">Clientes</a>
+    <a href="#trabajadores"  onclick="closeMobile()">Profesionales</a>
+    <a href="#faq"           onclick="closeMobile()">FAQ</a>
+    <div class="nav-mobile-btns">
+      <a href="#cta-final" class="btn btn-azul"  onclick="closeMobile()" style="justify-content:center;">Soy cliente</a>
+      <a href="#cta-final" class="btn btn-verde" onclick="closeMobile()" style="justify-content:center;">Soy profesional</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-topline"></div>
+  <div class="blob blob-a"></div>
+  <div class="blob blob-v"></div>
+  <div class="blob blob-m"></div>
+  <div class="hero-grid"></div>
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-eyebrow">
+        <span class="hero-badge hb-a">
+          <svg class="i-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          Para clientes
+        </span>
+        <span class="hero-badge hb-v">
+          <svg class="i-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          Para profesionales
+        </span>
+      </div>
+      <h1 class="hero-title">
+        El profesional que necesitás,<br/>
+        <span class="hl-a">disponible ahora.</span>
+        <span class="hero-sub-line">Sin vueltas. Con confianza.</span>
+      </h1>
+      <p class="hero-subtitle">ArreglaYa conecta personas que necesitan resolver servicios del hogar con profesionales verificados, organizados y listos para trabajar. Rápido, claro y confiable.</p>
+      <div class="hero-ctas">
+        <a href="#cta-final" class="btn btn-azul">
+          <svg class="i-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          Necesito un servicio
+        </a>
+        <a href="#cta-final" class="btn btn-verde">
+          <svg class="i-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+          Quiero ofrecer mis servicios
+        </a>
+        <a href="#que-es" class="btn btn-outline-blanco">Conocé el proyecto</a>
+      </div>
+      <div class="hero-stats">
+        <div><div class="stat-num">+20</div><div class="stat-label">rubros de servicios</div></div>
+        <div><div class="stat-num">100%</div><div class="stat-label">trazabilidad garantizada</div></div>
+        <div><div class="stat-num">$0</div><div class="stat-label">costo para profesionales</div></div>
+        <div><div class="stat-num">2</div><div class="stat-label">roles claros en la plataforma</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEMA -->
+<section id="problema">
+  <div class="container">
+    <div class="prob-intro reveal">
+      <div>
+        <span class="label label-blanco">El problema que resolvemos</span>
+        <h2>Contratar un servicio en Argentina<br/>no debería ser tan difícil</h2>
+      </div>
+      <p>La informalidad, la falta de referencias reales y la desorganización hacen que algo simple se vuelva un dolor de cabeza.</p>
+    </div>
+    <div class="prob-grid">
+      <div class="prob-card reveal"><div class="prob-icon"><svg class="i-md" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.45)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div><h4>Sin referencias reales</h4><p>Contratás por recomendación de alguien que conoció a alguien. No hay forma de verificar quién viene a tu casa.</p></div>
+      <div class="prob-card reveal"><div class="prob-icon"><svg class="i-md" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.45)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div><h4>Informalidad total</h4><p>No hay presupuesto escrito, no hay garantía, no hay rastro del trabajo. Si algo sale mal, no tenés a quién reclamar.</p></div>
+      <div class="prob-card reveal"><div class="prob-icon"><svg class="i-md" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.45)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div><h4>Difícil encontrar quién trabaje</h4><p>Buscar un plomero o electricista disponible puede llevar horas entre llamadas y mensajes sin respuesta.</p></div>
+      <div class="prob-card reveal"><div class="prob-icon"><svg class="i-md" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.45)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div><h4>El trabajador pierde oportunidades</h4><p>Los profesionales de oficio no tienen cómo mostrar su reputación. Dependen del boca en boca sin organización digital.</p></div>
+      <div class="prob-card reveal"><div class="prob-icon"><svg class="i-md" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.45)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div><h4>Sin historial ni seguimiento</h4><p>No hay forma de puntuar ni dejar comentarios verificados. La reputación del profesional no viaja con él.</p></div>
+      <div class="prob-card reveal"><div class="prob-icon"><svg class="i-md" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.45)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div><h4>Precios arbitrarios</h4><p>Sin referencia de mercado, el cliente no sabe si paga bien o mal. Esa desconfianza frena el vínculo antes de empezar.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- QUÉ ES -->
+<section id="que-es" class="section">
+  <div class="container">
+    <div class="reveal" style="max-width:720px;margin:0 auto;text-align:center;">
+      <span class="label label-azul">Qué es ArreglaYa</span>
+      <h2 style="margin-bottom:22px;">Una plataforma que ordena, conecta y construye confianza</h2>
+      <p class="text-lg" style="margin-bottom:16px;"><strong style="color:var(--azul);">ArreglaYa</strong> es un marketplace de servicios del hogar y oficios que conecta a clientes que necesitan resolver algo con profesionales verificados que quieren trabajar de forma más organizada.</p>
+      <p style="margin-bottom:52px;">No es solo una app de contactos. Es un sistema que digitaliza el vínculo entre quien necesita un servicio y quien lo presta, generando reputación, trazabilidad y confianza para los dos lados.</p>
+    </div>
+    <div class="que-es-pillars reveal">
+      <div class="qe-pillar">
+        <div class="qe-icon qei-a">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--azul)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        <h4>+20 rubros</h4>
+        <p>Plomería, electricidad, limpieza, mantenimiento y oficios varios. Un solo lugar para todo.</p>
+      </div>
+      <div class="qe-pillar">
+        <div class="qe-icon qei-v">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--verde)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <h4>Profesionales verificados</h4>
+        <p>Cada perfil tiene historial real, calificaciones de clientes anteriores y datos validados.</p>
+      </div>
+      <div class="qe-pillar">
+        <div class="qe-icon qei-a">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--azul)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/></svg>
+        </div>
+        <h4>Trazabilidad completa</h4>
+        <p>Cada servicio queda registrado de principio a fin. Presupuesto, horario, ejecución y calificación.</p>
+      </div>
+      <div class="qe-pillar">
+        <div class="qe-icon qei-v">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--verde)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        </div>
+        <h4>Pensada para escalar</h4>
+        <p>Diseñada para Argentina, con arquitectura y visión para crecer a toda la región.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CÓMO FUNCIONA -->
+<section id="como-funciona" class="section">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="label label-neutral">Cómo funciona</span>
+      <h2>Simple de usar, para los dos lados</h2>
+      <p>Tres pasos y el trabajo está en marcha. Sin complicaciones, sin intermediarios innecesarios.</p>
+    </div>
+    <div class="tabs-wrap">
+      <div class="tabs">
+        <button class="tab-btn act-a" id="tab-cli" onclick="switchTab('cli')"><span class="dot dot-a"></span> Soy cliente</button>
+        <button class="tab-btn" id="tab-pro" onclick="switchTab('pro')"><span class="dot dot-v"></span> Soy profesional</button>
+      </div>
+    </div>
+    <div class="tab-content active" id="content-cli">
+      <div class="steps-grid">
+        <div class="step-card reveal"><div class="step-num sn-a">1</div><h4>Publicá tu solicitud</h4><p>Describí qué necesitás: tipo de servicio, ubicación y disponibilidad horaria. En minutos, desde tu celular.</p></div>
+        <div class="step-card reveal"><div class="step-num sn-a">2</div><h4>Elegí al profesional</h4><p>Recibís propuestas de profesionales verificados con perfil, reputación y calificaciones reales. Vos elegís con información.</p></div>
+        <div class="step-card reveal"><div class="step-num sn-a">3</div><h4>Coordiná y evaluá</h4><p>Confirmás el trabajo, coordinás el horario y al terminar dejás tu calificación. Todo queda registrado.</p></div>
+      </div>
+    </div>
+    <div class="tab-content" id="content-pro">
+      <div class="steps-grid">
+        <div class="step-card reveal"><div class="step-num sn-v">1</div><h4>Creá tu perfil profesional</h4><p>Completá tu perfil con tu rubro, experiencia, zona de cobertura y disponibilidad. Tu reputación empieza desde el primer trabajo.</p></div>
+        <div class="step-card reveal"><div class="step-num sn-v">2</div><h4>Encontrá trabajos disponibles</h4><p>Ves solicitudes activas en tu zona y en tu rubro. Mandás tu propuesta al cliente con presupuesto y disponibilidad.</p></div>
+        <div class="step-card reveal"><div class="step-num sn-v">3</div><h4>Trabajá y construí reputación</h4><p>Completás el trabajo, recibís la calificación y crecés en visibilidad. Cada trabajo suma a tu perfil.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BENEFICIOS CLIENTES -->
+<section id="clientes" class="section">
+  <div class="container">
+    <div class="ben-grid">
+      <div class="reveal">
+        <span class="label label-azul">Para clientes</span>
+        <h2 style="margin-bottom:22px;">Resolvé lo que necesitás, sin estrés ni incertidumbre</h2>
+        <p style="margin-bottom:38px;">Sabemos lo que pasa cuando buscás un profesional por tu cuenta: nadie contesta, no sabés quién viene, no hay garantía. Diseñamos ArreglaYa para cambiar eso.</p>
+        <div class="ben-list">
+          <div class="ben-item"><div class="ben-icon bi-a"><svg class="i-md" viewBox="0 0 24 24" fill="none" stroke="var(--azul-dark)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div><div><h4>Respuesta rápida</h4><p style="font-size:14px;">Publicás tu solicitud y recibís propuestas de profesionales disponibles al instante. Sin esperar días ni llamar a diez contactos.</p></div></div>
+          <div class="ben-item"><div class="ben-icon bi-a"><svg class="i-md" viewBox="0 0 24 24" fill="none" stroke="var(--azul-dark)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div><h4>Profesionales verificados</h4><p style="font-size:14px;">Cada profesional tiene perfil con historial, calificaciones de otros clientes y datos verificados. Sabés con quién tratás antes de confirmar.</p></div></div>
+          <div class="ben-item"><div class="ben-icon bi-a"><svg class="i-md" viewBox="0 0 24 24" fill="none" stroke="var(--azul-dark)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div><div><h4>Todo queda registrado</h4><p style="font-size:14px;">El servicio tiene presupuesto, horario confirmado y calificación final. Si algo no sale bien, hay trazabilidad completa del trabajo.</p></div></div>
+          <div class="ben-item"><div class="ben-icon bi-a"><svg class="i-md" viewBox="0 0 24 24" fill="none" stroke="var(--azul-dark)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><div><h4>Tu tiempo vale</h4><p style="font-size:14px;">Coordinás el horario directamente desde la plataforma. Sin llamadas infinitas ni WhatsApps perdidos. El trabajo, agendado en minutos.</p></div></div>
+        </div>
+      </div>
+      <div class="reveal">
+        <div class="bv-card">
+          <div class="bv-top">
+            <div style="display:flex;align-items:center;gap:12px;"><div class="bv-avatar bva-a">CL</div><div><div style="font-family:var(--ff-brand);font-weight:700;font-size:15px;">Carolina López</div><div style="font-size:12px;color:var(--texto-suave);">Cliente verificada</div></div></div>
+            <span class="bv-badge bvb-a">Cliente</span>
+          </div>
+          <div style="background:var(--fondo);border-radius:11px;padding:15px;margin-bottom:16px;">
+            <div style="font-family:var(--ff-brand);font-size:12px;font-weight:700;color:var(--texto-suave);margin-bottom:7px;text-transform:uppercase;letter-spacing:0.06em;">Solicitud publicada</div>
+            <div style="font-weight:700;color:var(--texto);margin-bottom:4px;font-family:var(--ff-brand);">Arreglo de pérdida de agua en baño</div>
+            <div style="font-size:13px;color:var(--texto-suave);">Buenos Aires · Hoy, 14:30 hs</div>
+          </div>
+          <div class="bv-row"><div class="bv-row-l"><div class="bv-dot" style="background:var(--verde);"></div><div><div style="font-family:var(--ff-brand);font-weight:700;font-size:14px;">3 propuestas recibidas</div><div style="font-size:12px;color:var(--texto-suave);">En los últimos 15 minutos</div></div></div><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--texto-suave)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></div>
+          <div class="bv-row" style="margin-bottom:0;"><div class="bv-row-l"><div class="bv-dot" style="background:#F59E0B;"></div><div><div style="font-family:var(--ff-brand);font-weight:700;font-size:14px;">Historial de trabajos</div><div style="font-size:12px;color:var(--texto-suave);">4 servicios completados · ⭐ 4.8</div></div></div><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--texto-suave)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BENEFICIOS PROFESIONALES -->
+<section id="trabajadores" class="section">
+  <div class="container">
+    <div class="ben-grid rev">
+      <div class="reveal">
+        <div class="bv-card">
+          <div class="bv-top">
+            <div style="display:flex;align-items:center;gap:12px;"><div class="bv-avatar bva-v">MR</div><div><div style="font-family:var(--ff-brand);font-weight:700;font-size:15px;">Martín Rodríguez</div><div style="font-size:12px;color:var(--texto-suave);">Plomero · 5 años de experiencia</div></div></div>
+            <span class="bv-badge bvb-v">Profesional</span>
+          </div>
+          <div style="display:flex;gap:10px;margin-bottom:16px;">
+            <div style="flex:1;background:var(--fondo);border-radius:10px;padding:14px;text-align:center;"><div style="font-family:var(--ff-brand);font-size:1.6rem;font-weight:800;color:var(--azul);letter-spacing:-0.03em;">48</div><div style="font-size:12px;color:var(--texto-suave);">Trabajos</div></div>
+            <div style="flex:1;background:var(--fondo);border-radius:10px;padding:14px;text-align:center;"><div style="font-family:var(--ff-brand);font-size:1.6rem;font-weight:800;color:#F59E0B;letter-spacing:-0.03em;">4.9</div><div style="font-size:12px;color:var(--texto-suave);">Calificación</div></div>
+            <div style="flex:1;background:var(--fondo);border-radius:10px;padding:14px;text-align:center;"><div style="font-family:var(--ff-brand);font-size:1.6rem;font-weight:800;color:var(--verde);letter-spacing:-0.03em;">97%</div><div style="font-size:12px;color:var(--texto-suave);">Respuesta</div></div>
+          </div>
+          <div class="bv-row"><div class="bv-row-l"><div class="bv-dot" style="background:var(--azul);"></div><span style="font-size:14px;color:var(--texto);">Trabajo disponible en tu zona</span></div><span class="bv-badge bvb-a" style="font-size:11px;">Nuevo</span></div>
+          <div class="bv-row" style="margin-bottom:0;"><div class="bv-row-l"><div class="bv-dot" style="background:var(--verde);"></div><span style="font-size:14px;color:var(--texto);">Pago confirmado por servicio</span></div><span class="bv-badge bvb-v" style="font-size:11px;">Cobrado</span></div>
+        </div>
+      </div>
+      <div class="reveal">
+        <span class="label label-verde">Para profesionales</span>
+        <h2 style="margin-bottom:22px;">Tu trabajo tiene valor. Hacelo visible y conseguí más clientes</h2>
+        <p style="margin-bottom:38px;">Sabemos que sos bueno en lo que hacés. El problema es que sin presencia digital, tu reputación no viaja. ArreglaYa te da las herramientas para que tu trabajo hable por vos — y sin cobrar nada por eso.</p>
+        <div class="ben-list">
+          <div class="ben-item"><div class="ben-icon bi-v"><svg class="i-md" viewBox="0 0 24 24" fill="none" stroke="var(--verde-dark)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><div><h4>Más clientes, sin salir a buscarlos</h4><p style="font-size:14px;">Las solicitudes llegan a vos según tu rubro y zona. No gastás en publicidad. La plataforma trabaja para mostrarte a quienes te necesitan.</p></div></div>
+          <div class="ben-item"><div class="ben-icon bi-v"><svg class="i-md" viewBox="0 0 24 24" fill="none" stroke="var(--verde-dark)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div><div><h4>Construí tu reputación digital</h4><p style="font-size:14px;">Cada trabajo bien hecho suma a tu perfil. Las calificaciones reales te destacan y generan más oportunidades. Tu historial es tu currículum.</p></div></div>
+          <div class="ben-item"><div class="ben-icon bi-v"><svg class="i-md" viewBox="0 0 24 24" fill="none" stroke="var(--verde-dark)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div><div><h4>Agenda organizada, sin caos</h4><p style="font-size:14px;">Coordinás horarios, confirmás trabajos y gestionás tu disponibilidad desde un solo lugar. Sin papeles, sin WhatsApps perdidos.</p></div></div>
+          <div class="ben-item"><div class="ben-icon bi-v"><svg class="i-md" viewBox="0 0 24 24" fill="none" stroke="var(--verde-dark)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div><div><h4>Ingresos más predecibles</h4><p style="font-size:14px;">Con mayor visibilidad y reputación acumulada, trabajás más seguido con clientes que ya te eligieron conscientemente. Sin ningún costo de acceso.</p></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONFIANZA -->
+<section id="confianza" class="section">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="label label-blanco">Confianza y seguridad</span>
+      <h2 style="color:#fff;">Diseñado para que confíes.<br/>De los dos lados.</h2>
+      <p style="color:rgba(255,255,255,0.46);">La confianza no es un slogan. Es el núcleo de lo que construimos. Cada decisión de diseño está pensada para reducir la incertidumbre y proteger a clientes y profesionales por igual.</p>
+    </div>
+    <div class="con-grid">
+      <div class="con-card reveal"><div class="con-icon ci-a"><svg class="i-lg" viewBox="0 0 24 24" fill="none" stroke="var(--azul-mid)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><h4>Perfiles verificados</h4><p>Los profesionales pasan por validación antes de poder recibir solicitudes. Los clientes también tienen un perfil con historial de comportamiento.</p></div>
+      <div class="con-card reveal"><div class="con-icon ci-v"><svg class="i-lg" viewBox="0 0 24 24" fill="none" stroke="var(--verde-mid)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div><h4>Reputación real y pública</h4><p>Las calificaciones son dejadas por personas que realmente contrataron el servicio. No se puede manipular: cada estrella es un trabajo real.</p></div>
+      <div class="con-card reveal"><div class="con-icon ci-a"><svg class="i-lg" viewBox="0 0 24 24" fill="none" stroke="var(--azul-mid)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div><h4>Trazabilidad completa</h4><p>Cada servicio tiene un registro completo: quién lo solicitó, quién lo hizo, cuándo, cómo y la calificación resultante. Todo queda guardado.</p></div>
+      <div class="con-card reveal"><div class="con-icon ci-v"><svg class="i-lg" viewBox="0 0 24 24" fill="none" stroke="var(--verde-mid)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><h4>Comunicación organizada</h4><p>El contacto entre cliente y profesional sucede dentro de la plataforma. Sin intercambio de datos personales innecesarios antes de confirmar.</p></div>
+      <div class="con-card reveal"><div class="con-icon ci-a"><svg class="i-lg" viewBox="0 0 24 24" fill="none" stroke="var(--azul-mid)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div><h4>Privacidad protegida</h4><p>Tu información personal está resguardada. Solo compartís lo que es necesario para coordinar el servicio, nada más, nada menos.</p></div>
+      <div class="con-card reveal"><div class="con-icon ci-v"><svg class="i-lg" viewBox="0 0 24 24" fill="none" stroke="var(--verde-mid)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.18h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 9a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div><h4>Soporte disponible</h4><p>Si algo no funciona como esperabas, el equipo de ArreglaYa está disponible para mediar y ayudarte a resolver cualquier situación.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- DIFERENCIADORES -->
+<section id="diferenciadores" class="section">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="label label-neutral">Por qué ArreglaYa</span>
+      <h2>No es solo otra app de servicios</h2>
+      <p>Hay muchas formas de encontrar un plomero. ArreglaYa apuesta por algo diferente: un sistema que profesionaliza el vínculo, no solo lo facilita.</p>
+    </div>
+    <div class="dif-grid">
+      <div class="dif-card da reveal"><div class="dif-num">01</div><h4>Dos lados, una experiencia</h4><p>La plataforma está pensada simultáneamente para clientes y profesionales. No sacrificamos la experiencia de uno por mejorar la del otro.</p></div>
+      <div class="dif-card dv reveal"><div class="dif-num">02</div><h4>Reputación como activo</h4><p>El sistema de calificaciones no es decorativo. Es el motor de confianza que hace que el profesional más confiable consiga más trabajo.</p></div>
+      <div class="dif-card dm reveal"><div class="dif-num">03</div><h4>Digitalización con propósito</h4><p>No digitalizamos el caos: lo organizamos. Cada función existe para resolver un problema real que vive en el mercado hoy.</p></div>
+      <div class="dif-card da reveal"><div class="dif-num">04</div><h4>Foco en el oficio</h4><p>Nos especializamos en servicios del hogar y oficios. Eso nos permite ser más útiles y confiables que una plataforma genérica.</p></div>
+      <div class="dif-card dv reveal"><div class="dif-num">05</div><h4>Diseñada para Argentina</h4><p>Entendemos el mercado local: informalidad, efectivo, WhatsApp, boca en boca. ArreglaYa parte de esa realidad para mejorarla desde adentro.</p></div>
+      <div class="dif-card dm reveal"><div class="dif-num">06</div><h4>Pensada para escalar</h4><p>El modelo funciona en un barrio, una ciudad o un país. La arquitectura del proyecto está diseñada para crecer sin perder lo que la hace confiable.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- VISIÓN -->
+<section id="vision" class="section">
+  <div class="container">
+    <div class="vision-wrap reveal">
+      <span class="label label-blanco" style="display:table;margin:0 auto 24px;">Visión</span>
+      <h2>Estamos construyendo algo que dure</h2>
+      <p>ArreglaYa nació para resolver un problema concreto: la informalidad y la desconfianza en el mercado de servicios del hogar en Argentina. Pero la visión es más amplia.</p>
+      <p>Creemos que cuando un profesional de oficio tiene acceso a herramientas digitales reales, su vida mejora. Y cuando un cliente puede confiar en quien contrata, se genera un vínculo que beneficia a toda la comunidad.</p>
+      <p>Estamos construyendo la infraestructura de confianza que el mercado de servicios necesitaba hace años.</p>
+      <div class="phases">
+        <div class="phase"><div class="phase-label pl-a">Fase 1 · Hoy</div><h4>Argentina</h4><p>Lanzamiento y validación en los principales mercados urbanos argentinos. Construcción de la comunidad inicial de clientes y profesionales.</p></div>
+        <div class="phase"><div class="phase-label pl-v">Fase 2 · Próximo</div><h4>Expansión regional</h4><p>Escalar el modelo a otras ciudades y eventualmente a países vecinos. FixGrow como marca internacional del mismo proyecto.</p></div>
+        <div class="phase"><div class="phase-label pl-g">Fase 3 · Futuro</div><h4>Plataforma integral</h4><p>Nuevas categorías, herramientas para profesionales, seguros de servicio y ecosistema completo de servicios del hogar.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" class="section">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="label label-neutral">Preguntas frecuentes</span>
+      <h2>Todo lo que necesitás saber</h2>
+      <p>Si tenés una duda que no está acá, podés escribirnos directamente.</p>
+    </div>
+    <div class="faq-wrap reveal">
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)"><h4>¿ArreglaYa es gratuita para los profesionales?</h4><div class="faq-toggle"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--texto-suave)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div></div><div class="faq-a"><div class="faq-ai"><p>Sí, completamente. Registrarse, crear tu perfil y acceder a solicitudes es gratis para los profesionales. El acceso a la plataforma no tiene ningún costo. Queremos que los profesionales entren sin barreras y crezcan con nosotros.</p></div></div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)"><h4>¿Los clientes pagan algo además del servicio?</h4><div class="faq-toggle"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--texto-suave)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div></div><div class="faq-a"><div class="faq-ai"><p>Los clientes pagan una tarifa mínima de servicio que es razonable y completamente transparente. Esta tarifa sostiene la plataforma, garantiza la verificación de profesionales, la trazabilidad de cada trabajo y el soporte ante cualquier inconveniente. Sin sorpresas.</p></div></div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)"><h4>¿Cómo sé que el profesional es confiable?</h4><div class="faq-toggle"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--texto-suave)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div></div><div class="faq-a"><div class="faq-ai"><p>Cada profesional pasa por un proceso de verificación de identidad y completitud de perfil antes de poder recibir solicitudes. Además, el sistema de calificaciones refleja la experiencia real de clientes anteriores. Podés ver el historial completo antes de confirmar cualquier trabajo.</p></div></div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)"><h4>¿Qué pasa si el trabajo no quedó bien hecho?</h4><div class="faq-toggle"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--texto-suave)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div></div><div class="faq-a"><div class="faq-ai"><p>Si el servicio no cumplió con lo acordado, podés reportarlo desde la plataforma. El equipo de ArreglaYa revisa la situación y media entre las partes. El sistema de trazabilidad permite rastrear todo lo que ocurrió durante el proceso.</p></div></div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)"><h4>¿Cómo me registro como profesional?</h4><div class="faq-toggle"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--texto-suave)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div></div><div class="faq-a"><div class="faq-ai"><p>Registrarte es gratis y rápido. Creás tu cuenta como profesional, completás tu perfil con nombre, rubro, zona de cobertura y foto, y una vez aprobado empezás a recibir solicitudes. Sin costos, sin letra chica.</p></div></div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)"><h4>¿En qué ciudades está disponible ArreglaYa?</h4><div class="faq-toggle"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--texto-suave)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div></div><div class="faq-a"><div class="faq-ai"><p>ArreglaYa está en etapa de lanzamiento y validación. Si querés ser de los primeros en usarla en tu ciudad, podés registrar tu interés y te avisamos cuando lleguemos a tu zona.</p></div></div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)"><h4>¿Puedo ofrecer más de un rubro como profesional?</h4><div class="faq-toggle"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--texto-suave)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div></div><div class="faq-a"><div class="faq-ai"><p>Sí. Si trabajás en más de un rubro (por ejemplo, electricidad y mantenimiento general), podés indicarlo en tu perfil. Recibirás solicitudes de todos los rubros que hayas habilitado.</p></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section id="cta-final" class="section">
+  <div class="blob blob-a" style="opacity:0.10;"></div>
+  <div class="blob blob-v" style="opacity:0.09;"></div>
+  <div class="container">
+    <div class="cta-wrap reveal">
+      <span class="label label-blanco" style="display:table;margin:0 auto 24px;">Empezá ahora</span>
+      <h2>¿Sos cliente o profesional?<br/>Hay un lugar para vos</h2>
+      <p>ArreglaYa está diseñada para los dos lados del mismo problema. Elegí el tuyo y registrá tu interés para ser de los primeros en usarla.</p>
+      <div class="cta-cards">
+        <div class="cta-card cta-card-a">
+          <div style="width:50px;height:50px;background:rgba(26,140,255,0.20);border-radius:13px;display:flex;align-items:center;justify-content:center;margin-bottom:18px;"><svg class="i-lg" viewBox="0 0 24 24" fill="none" stroke="var(--azul-mid)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+          <h3>Soy cliente</h3>
+          <p>Necesito contratar servicios del hogar con alguien de confianza, rápido y sin complicaciones.</p>
+          <a href="mailto:contacto@arreglaya.com?subject=Quiero ser cliente en ArreglaYa" class="btn btn-azul" style="width:100%;justify-content:center;">Me interesa como cliente</a>
+        </div>
+        <div class="cta-card cta-card-v">
+          <div style="width:50px;height:50px;background:rgba(46,189,94,0.20);border-radius:13px;display:flex;align-items:center;justify-content:center;margin-bottom:18px;"><svg class="i-lg" viewBox="0 0 24 24" fill="none" stroke="var(--verde-mid)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div>
+          <h3>Soy profesional</h3>
+          <p>Ofrezco servicios y quiero conseguir más clientes de forma organizada, con reputación real y sin costo de acceso.</p>
+          <a href="mailto:contacto@arreglaya.com?subject=Quiero ser profesional en ArreglaYa" class="btn btn-verde" style="width:100%;justify-content:center;">Me interesa como profesional</a>
+        </div>
+      </div>
+      <p style="color:rgba(255,255,255,0.28);font-size:13px;margin-top:24px;">También podés escribirnos a <a href="mailto:contacto@arreglaya.com" style="color:rgba(255,255,255,0.48);text-decoration:underline;">contacto@arreglaya.com</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div>
+        <a href="#hero" class="brand-logo brand-logo-dark"><span class="logo-a">Arregla</span><span class="logo-v">Ya</span></a>
+        <p class="footer-desc">Marketplace de servicios del hogar que conecta clientes con profesionales verificados. Rápido, organizado y confiable. Hecho en Argentina.</p>
+        <div class="footer-roles">
+          <span class="fr-chip frc-a"><span class="dot dot-a" style="width:6px;height:6px;"></span>Clientes</span>
+          <span class="fr-chip frc-v"><span class="dot dot-v" style="width:6px;height:6px;"></span>Profesionales</span>
+        </div>
+      </div>
+      <div class="footer-col"><h5>Plataforma</h5><ul><li><a href="#que-es">Qué es ArreglaYa</a></li><li><a href="#como-funciona">Cómo funciona</a></li><li><a href="#modelo">Precios</a></li><li><a href="#clientes">Para clientes</a></li><li><a href="#trabajadores">Para profesionales</a></li></ul></div>
+      <div class="footer-col"><h5>Proyecto</h5><ul><li><a href="#diferenciadores">Por qué ArreglaYa</a></li><li><a href="#confianza">Confianza y seguridad</a></li><li><a href="#vision">Visión</a></li><li><a href="#faq">Preguntas frecuentes</a></li></ul></div>
+      <div class="footer-col"><h5>Contacto</h5><ul><li><a href="mailto:contacto@arreglaya.com">contacto@arreglaya.com</a></li><li><a href="#cta-final">Registrar interés</a></li></ul></div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 ArreglaYa. Todos los derechos reservados. Argentina.</p>
+      <p>Diseñado con propósito · <span style="color:rgba(255,255,255,0.10);">FixGrow · International</span></p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // NAV scroll
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 40));
+
+  // Mobile menu
+  document.getElementById('hamburger').addEventListener('click', () => document.getElementById('mobile-menu').classList.toggle('open'));
+  function closeMobile() { document.getElementById('mobile-menu').classList.remove('open'); }
+
+  // Tabs
+  function switchTab(role) {
+    const btnCli = document.getElementById('tab-cli');
+    const btnPro = document.getElementById('tab-pro');
+    const conCli = document.getElementById('content-cli');
+    const conPro = document.getElementById('content-pro');
+    if (role === 'cli') {
+      btnCli.className='tab-btn act-a'; btnPro.className='tab-btn';
+      conCli.classList.add('active'); conPro.classList.remove('active');
+    } else {
+      btnPro.className='tab-btn act-v'; btnCli.className='tab-btn';
+      conPro.classList.add('active'); conCli.classList.remove('active');
+    }
+    const id = role === 'cli' ? 'content-cli' : 'content-pro';
+    document.querySelectorAll('#' + id + ' .reveal').forEach(el => {
+      el.classList.remove('visible');
+      setTimeout(() => el.classList.add('visible'), 80);
+    });
+  }
+
+  // FAQ
+  function toggleFaq(btn) {
+    const item = btn.closest('.faq-item');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  }
+
+  // Scroll reveal
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.10, rootMargin: '0px 0px -36px 0px' });
+
+  document.querySelectorAll('.reveal').forEach((el) => {
+    const siblings = el.parentElement.querySelectorAll('.reveal');
+    const idx = Array.from(siblings).indexOf(el);
+    el.style.transitionDelay = `${idx * 0.07}s`;
+    obs.observe(el);
+  });
+</script>
+</body>
+</html>
